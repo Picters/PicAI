@@ -1,3 +1,5 @@
+/* style.css */
+
 /* Основные стили остаются прежними */
 
 * {
@@ -87,15 +89,17 @@ main {
     flex-direction: column;
 }
 
+/* Контейнер для сообщений с прокруткой */
 .chat-box {
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: auto; /* Прокрутка */
     border-bottom: 1px solid #dddddd;
     border-radius: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Разделяем сообщения */
+    gap: 10px;
+    max-height: calc(100% - 80px); /* Максимальная высота */
 }
 
 #chat-form {
@@ -130,7 +134,7 @@ button:hover {
     background-color: #3700b3;
 }
 
-/* Стили для сообщений в виде "пузырей" */
+/* Сообщения */
 .message {
     max-width: 70%;
     padding: 10px 15px;
@@ -143,14 +147,12 @@ button:hover {
     margin-bottom: 10px;
 }
 
-/* Сообщения пользователя - выровнены справа, другой цвет */
 .message.user {
     background-color: #dcf8c6;
     align-self: flex-end;
     border-bottom-right-radius: 0;
 }
 
-/* Сообщения AI/другого собеседника - выровнены слева */
 .message.ai {
     background-color: #ffffff;
     border: 1px solid #dddddd;
@@ -158,7 +160,7 @@ button:hover {
     border-bottom-left-radius: 0;
 }
 
-/* Треугольники-указатели (хвостики) на "пузырях" */
+/* Треугольники-указатели */
 .message.user::after {
     content: '';
     position: absolute;
@@ -183,7 +185,7 @@ button:hover {
     border-color: transparent #ffffff transparent transparent;
 }
 
-/* Анимация появления сообщений */
+/* Анимация появления */
 @keyframes messageAppear {
     from {
         opacity: 0;

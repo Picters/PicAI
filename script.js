@@ -1,48 +1,48 @@
 // script.js
 
-// Function to hide the loading screen and show the chat
+// Функция для скрытия загрузочного экрана и отображения чата
 function showChat() {
     const loadingScreen = document.getElementById('loading-screen');
     const chatContainer = document.getElementById('chat-container');
 
-    // Hide the loading screen with a fade-out effect
+    // Скроем загрузочный экран с плавным эффектом
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
         loadingScreen.style.display = 'none';
-        chatContainer.classList.add('show'); // Add the "show" class to make chat appear with animation
-    }, 500);  // Delay to match the fade-out transition time
+        chatContainer.classList.add('show'); // Плавное появление чата
+    }, 500);
 }
 
-// Wait 5 seconds, then show the chat
+// Через 5 секунд покажем чат
 setTimeout(showChat, 5000);
 
-// Chat form submission logic
+// Логика отправки сообщений в чат
 document.getElementById('chat-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Stop form submission
+    event.preventDefault(); // Останавливаем отправку формы
 
     const userInput = document.getElementById('user-input').value;
     const chatBox = document.getElementById('chat-box');
 
-    // Add user message to the chat with "user" class
+    // Добавляем сообщение пользователя в чат
     const userMessage = document.createElement('div');
     userMessage.textContent = userInput;
     userMessage.classList.add('message', 'user');
     chatBox.appendChild(userMessage);
 
-    // Simulate a response from AI
+    // Симуляция ответа AI
     setTimeout(() => {
         const aiMessage = document.createElement('div');
         aiMessage.textContent = "This is AI's response.";
         aiMessage.classList.add('message', 'ai');
         chatBox.appendChild(aiMessage);
 
-        // Scroll chat box to the bottom
+        // Автопрокрутка вниз
         chatBox.scrollTop = chatBox.scrollHeight;
     }, 1000);
 
-    // Clear input field
+    // Очистка поля ввода
     document.getElementById('user-input').value = '';
 
-    // Scroll chat box to the bottom
+    // Прокрутка вниз
     chatBox.scrollTop = chatBox.scrollHeight;
 });
