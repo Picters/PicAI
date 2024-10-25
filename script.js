@@ -1,69 +1,78 @@
-// script.js
+// Подключаем массивы QA из каждого файла (предполагая, что они экспортируются как qaPairs)
+const allQAPairs = [
+    ...greetingsFarewellsQA,
+    ...generalKnowledgeQA,
+    ...scienceQA,
+    ...animalsQA,
+    ...artCultureQA,
+    ...natureQA,
+    ...philosophyPsychologyQA,
+    ...healthFitnessQA,
+    ...techInternetQA
+];
 
-// Функция для скрытия загрузочного экрана и показа чата
-function showChat() {
-    const loadingScreen = document.getElementById('loading-screen');
-    const chatContainer = document.getElementById('chat-container');
-
-    // Плавное скрытие загрузочного экрана
-    loadingScreen.style.opacity = '0';
-    setTimeout(() => {
-        loadingScreen.style.display = 'none'; // Полностью убираем экран
-        chatContainer.classList.add('show'); // Плавное появление чата
-    }, 500); // Подожди, пока загрузка завершится (0.5 секунды)
+// Функция для поиска ответа на заданный вопрос
+function findAnswer(question) {
+    const lowerCaseQuestion = question.toLowerCase();
+    const foundPair = allQAPairs.find(pair => pair.question.toLowerCase() === lowerCaseQuestion);
+    return foundPair ? foundPair.answer : "Sorry, I don't understand your question.";
 }
 
-// Через 5 секунд показать чат
-setTimeout(showChat, 5000);
+// Анимация "думания" AI перед ответом
+function simulateThinking() {
+    const aiMessage = document.getElementById('ai-thinking');
+    aiMessage.classList.add('show');
 
-// Логика отправки сообщений в чат
-document.getElementById('chat-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Останавливаем отправку формы
+    return new Promise(resolve => {
+        setTimeout(() => {
+            aiMessage.classList.remove('show');
+            resolve();
+        }, 2000);  // Задержка в 2 секунды для имитации думания
+    });
+}
 
-    const userInput = document.getElementById('user-input').value;
-    const chatBox = document.getElementById('chat-box');
+// Обработка ввода и отображение сообщений
+document.getElementById('send-btn').addEventListener('click', async function () {
+    const userQuery = document.getElementById('query-input').value;
 
-    // Добавляем сообщение пользователя в чат
+    // Если строка пустая, ничего не делаем
+    if (!userQuery) return;
+
+    // Отображаем сообщение пользователя
     const userMessage = document.createElement('div');
-    userMessage.textContent = userInput;
+    userMessage.textContent = `You: ${userQuery}`;
     userMessage.classList.add('message', 'user');
-    chatBox.appendChild(userMessage);
+    document.querySelector('.chat-box').appendChild(userMessage);
 
-    // Очистка поля ввода
-    document.getElementById('user-input').value = '';
+    // Прокрутка вниз к последнему сообщению
+    document.querySelector('.chat-box').scrollTop = document.querySelector('.chat-box').scrollHeight;
 
-    // Прокрутка вниз
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // Симуляция думания AI перед ответом
+    await simulateThinking();
 
-    // Анимация "думания" AI
-    const aiThinking = document.createElement('div');
-    aiThinking.id = 'ai-thinking';
-    aiThinking.textContent = "PicAI is thinking...";
-    chatBox.appendChild(aiThinking);
+    // Находим ответ
+    const response = findAnswer(userQuery);
 
-    // Показать анимацию "думания"
-    aiThinking.classList.add('show');
+    // Отображаем сообщение от AI
+    const aiMessage = document.createElement('div');
+    aiMessage.textContent = `PicAI: ${response}`;
+    aiMessage.classList.add('message', 'ai');
+    document.querySelector('.chat-box').appendChild(aiMessage);
 
-    // Через 2 секунды AI ответит
-    setTimeout(() => {
-        // Убрать анимацию "думания"
-        aiThinking.classList.remove('show');
-        aiThinking.remove(); // Убираем элемент
+    // Прокрутка вниз к последнему сообщению
+    document.querySelector('.chat-box').scrollTop = document.querySelector('.chat-box').scrollHeight;
 
-        // Сгенерировать ответ
-        const aiMessage = document.createElement('div');
-        const response = getAIResponse(userInput);
-        aiMessage.textContent = response;
-        aiMessage.classList.add('message', 'ai');
-        chatBox.appendChild(aiMessage);
-
-        // Прокрутка вниз
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 2000); // Через 2 секунды AI "думает"
+    // Очищаем поле ввода
+    document.getElementById('query-input').value = '';
 });
 
-// Функция для генерации ответа на основе базы данных вопросов-ответов
-function getAIResponse(userInput) {
-    // Простой пример
-    return "Это ответ на ваш вопрос!";
-}
+// Плавное исчезновение экрана загрузки и появление чата
+window.onload = function () {
+    setTimeout(() => {
+        document.querySelector('.loading-screen').style.opacity = '0';
+        document.querySelector('.loading-screen').style.visibility = 'hidden';
+
+        // Показываем чат
+        document.getElementById('chat-container').classList.add('show');
+    }, 5000); // Задержка в 5 секунд
+};

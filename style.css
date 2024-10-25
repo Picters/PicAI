@@ -28,6 +28,10 @@ body {
     width: 100vw;
     background-color: #ffffff;
     transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100; /* Чтоб загрузка была выше всех элементов */
 }
 
 .rotating-icon {
@@ -54,6 +58,7 @@ body {
     visibility: hidden;
     transform: scale(0.9);
     transition: all 0.5s ease-in-out;
+    position: relative;
 }
 
 #chat-container.show {
