@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicAI - Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Загрузочный экран -->
+    <div id="loading-screen" class="loading-screen">
+        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-gemini-icon.png" alt="Google Gemini Icon" class="rotating-icon">
+    </div>
+
+    <!-- Чат -->
+    <div id="chat-container" class="hidden">
+        <header>
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-gemini-icon.png" alt="Google Gemini Icon" class="static-icon">
+            <h1>PicAI Chat</h1>
+        </header>
+
+        <main>
+            <div id="chat-box" class="chat-box">
+                <!-- Чат сообщения будут появляться здесь -->
+            </div>
+            <form id="chat-form">
+                <input type="text" id="user-input" placeholder="Введите ваш запрос..." required>
+                <button type="submit">Отправить</button>
+            </form>
+        </main>
+    </div>
+
+    <!-- Версия сайта -->
+    <div class="version">
+        v1.0
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
