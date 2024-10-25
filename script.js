@@ -23,10 +23,22 @@ document.getElementById('chat-form').addEventListener('submit', function(event) 
     const userInput = document.getElementById('user-input').value;
     const chatBox = document.getElementById('chat-box');
 
-    // Add user message to the chat
+    // Add user message to the chat with "user" class
     const userMessage = document.createElement('div');
-    userMessage.textContent = `You: ${userInput}`;
+    userMessage.textContent = userInput;
+    userMessage.classList.add('message', 'user');
     chatBox.appendChild(userMessage);
+
+    // Simulate a response from AI
+    setTimeout(() => {
+        const aiMessage = document.createElement('div');
+        aiMessage.textContent = "This is AI's response.";
+        aiMessage.classList.add('message', 'ai');
+        chatBox.appendChild(aiMessage);
+
+        // Scroll chat box to the bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
 
     // Clear input field
     document.getElementById('user-input').value = '';
