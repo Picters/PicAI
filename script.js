@@ -1,29 +1,36 @@
 // script.js
 
-// Функция для скрытия загрузочного экрана и отображения чата
+// Function to hide the loading screen and show the chat
 function showChat() {
-    document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('chat-container').classList.remove('hidden');
+    const loadingScreen = document.getElementById('loading-screen');
+    const chatContainer = document.getElementById('chat-container');
+
+    // Hide the loading screen with a fade-out effect
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        chatContainer.classList.add('show');
+    }, 500);  // Delay to match the fade-out transition time
 }
 
-// Ожидаем 5 секунд, затем показываем чат
+// Wait 5 seconds, then show the chat
 setTimeout(showChat, 5000);
 
-// Логика отправки сообщений в чат
+// Chat form submission logic
 document.getElementById('chat-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Останавливаем отправку формы
+    event.preventDefault(); // Stop form submission
 
     const userInput = document.getElementById('user-input').value;
     const chatBox = document.getElementById('chat-box');
 
-    // Добавляем сообщение пользователя в чат
+    // Add user message to the chat
     const userMessage = document.createElement('div');
-    userMessage.textContent = `Вы: ${userInput}`;
+    userMessage.textContent = `You: ${userInput}`;
     chatBox.appendChild(userMessage);
 
-    // Очищаем поле ввода
+    // Clear input field
     document.getElementById('user-input').value = '';
 
-    // Прокрутка чата вниз
+    // Scroll chat box to the bottom
     chatBox.scrollTop = chatBox.scrollHeight;
 });
