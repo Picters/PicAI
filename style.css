@@ -22,6 +22,7 @@
     display: inline-block;
     word-wrap: break-word;
     animation: messageAppear 0.3s ease-in-out;
+    margin-bottom: 10px;
 }
 
 /* User's own messages - right aligned, different color */
