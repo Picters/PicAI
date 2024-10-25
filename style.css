@@ -1,5 +1,4 @@
-/* Основные стили для всей страницы */
-
+/* Сброс стилей и базовая настройка для всей страницы */
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +7,7 @@
     transition: all 0.3s ease-in-out;
 }
 
+/* Основные стили для страницы */
 body {
     background-color: #ffffff;
     color: #000;
@@ -27,6 +27,7 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: #ffffff;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .rotating-icon {
@@ -90,13 +91,13 @@ main {
 .chat-box {
     flex-grow: 1;
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: auto; /* Прокрутка сообщений */
     border-bottom: 1px solid #dddddd;
     border-radius: 0 0 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: calc(100% - 80px); /* Прокручиваемое окно сообщений */
+    max-height: calc(100% - 80px); /* Ограничение высоты для прокрутки */
 }
 
 /* Форма отправки сообщений */
@@ -132,7 +133,7 @@ button:hover {
     background-color: #3700b3;
 }
 
-/* Стили для сообщений */
+/* Стили для сообщений в виде "пузырей" */
 .message {
     max-width: 70%;
     padding: 10px 15px;

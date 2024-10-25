@@ -1,31 +1,29 @@
 // script.js
 
-// Подключение вопросов и ответов из другого файла
-import { qaPairs } from './questions-answers.js';
-
 // Функция для скрытия загрузочного экрана и показа чата
 function showChat() {
     const loadingScreen = document.getElementById('loading-screen');
     const chatContainer = document.getElementById('chat-container');
 
+    // Плавное скрытие загрузочного экрана
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        chatContainer.classList.add('show');
-    }, 500);
+        loadingScreen.style.display = 'none'; // Полностью убираем экран
+        chatContainer.classList.add('show'); // Плавное появление чата
+    }, 500); // Подожди, пока загрузка завершится (0.5 секунды)
 }
 
 // Через 5 секунд показать чат
 setTimeout(showChat, 5000);
 
-// Логика отправки сообщений
+// Логика отправки сообщений в чат
 document.getElementById('chat-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Останавливаем отправку формы
 
     const userInput = document.getElementById('user-input').value;
     const chatBox = document.getElementById('chat-box');
 
-    // Добавление сообщения пользователя
+    // Добавляем сообщение пользователя в чат
     const userMessage = document.createElement('div');
     userMessage.textContent = userInput;
     userMessage.classList.add('message', 'user');
@@ -50,6 +48,7 @@ document.getElementById('chat-form').addEventListener('submit', function(event) 
     setTimeout(() => {
         // Убрать анимацию "думания"
         aiThinking.classList.remove('show');
+        aiThinking.remove(); // Убираем элемент
 
         // Сгенерировать ответ
         const aiMessage = document.createElement('div');
@@ -60,18 +59,11 @@ document.getElementById('chat-form').addEventListener('submit', function(event) 
 
         // Прокрутка вниз
         chatBox.scrollTop = chatBox.scrollHeight;
-    }, 2000);
+    }, 2000); // Через 2 секунды AI "думает"
 });
 
 // Функция для генерации ответа на основе базы данных вопросов-ответов
 function getAIResponse(userInput) {
-    const lowerInput = userInput.toLowerCase();
-
-    // Поиск ответа на основе введенного текста
-    for (let i = 0; i < qaPairs.length; i++) {
-        if (lowerInput.includes(qaPairs[i].question.toLowerCase())) {
-            return qaPairs[i].answer;
-        }
-    }
-    return "I'm sorry, I don't know the answer to that.";
+    // Простой пример
+    return "Это ответ на ваш вопрос!";
 }
