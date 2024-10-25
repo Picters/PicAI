@@ -9,7 +9,7 @@ function showChat() {
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
         loadingScreen.style.display = 'none';
-        chatContainer.classList.add('show');
+        chatContainer.classList.add('show'); // Add the "show" class to make chat appear with animation
     }, 500);  // Delay to match the fade-out transition time
 }
 
